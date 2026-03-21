@@ -102,10 +102,12 @@
     color: white;
     padding: 60px 20px;
     text-align: center;
+    box-sizing: border-box;
   }
   .festival-container {
     max-width: 1100px;
     margin: 0 auto;
+    width: 100%;
   }
   .festival-title {
     font-size: 2.8rem;
@@ -247,26 +249,30 @@
   }
 
   /* Các style còn lại giữ nguyên như cũ (event-card, footer, popup, v.v.) */
-/* Grid xếp dọc, mỗi card 800x500px */
+/* Grid xếp dọc, responsive */
   .events-grid {
     display: flex;
     flex-direction: column;
     gap: 30px;
-    width: 950px;
+    width: 100%;
+    max-width: 950px;
     margin: 40px auto;
+    box-sizing: border-box;
   }
 
   .event-card {
     background: white;
     color: #333;
-    width: 950px;
-    height: 500px;
-    overflow: hidden;
+    width: 100%;
+    min-height: 220px;
+    height: auto;
+    overflow: visible;
     font-size: 1.0rem;
     display: flex;
     flex-direction: column;
     border-radius: 16px;
     box-shadow: 0 6px 24px rgba(0,0,0,0.25);
+    box-sizing: border-box;
   }
 
   .event-card + .event-card {
@@ -766,7 +772,7 @@
         </div>
         <div class="card-content">
           <ul>
-            <li>Lân sư rồng – trống hội khai xuân sdfsdfsdfsdfsdfffffffffffffffffffffffffffffsfsdfsfsdfsfsfsf</li>
+            <li>Lân sư rồng – trống hội khai xuân <br>sdfsdfsdfsdfsdfffffffffffffffffffffffffffffsfs<br>dfsfsdfsfsfsf</li>
             <li>Lân nhả ngọc – tấn lộc đầu năm</li>
             <li>Trải nghiệm cổ phục Việt</li>
             <li>Ông đồ cho chữ đầu năm</li>
@@ -821,7 +827,7 @@
     </p>
 
     <p class="footer-highlight">19006601</p>
-    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153">info@dieutuongam.com</a></p>
+    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153"><span class="__cf_email__" data-cfemail="066f68606946626f63737273696861676b2865696b">[email&#160;protected]</span></a></p>
     <p class="footer-highlight">8H30 - 20H00</p>
 
     <div class="footer-line"></div>
@@ -839,7 +845,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Toggle preview social
 function showPreview(platform) {
   // Ẩn tất cả preview
