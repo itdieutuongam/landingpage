@@ -998,7 +998,7 @@
     </p>
 
     <p class="footer-highlight">19006601</p>
-    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153"><span class="__cf_email__" data-cfemail="066f68606946626f63737273696861676b2865696b">info@dieutuongam.com</span></a></p>
+    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153"><span class="__cf_email__" data-cfemail="066f68606946626f63737273696861676b2865696b"><span class="__cf_email__" data-cfemail="7910171f16391d101c0c0d0c16171e1814571a1614">[email&#160;protected]</span></span></a></p>
     <p class="footer-highlight">8H30 - 20H00</p>
 
     <div class="footer-line"></div>
@@ -1015,7 +1015,7 @@
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Toggle preview social
 function showPreview(platform) {
   // Ẩn tất cả preview
@@ -1040,14 +1040,23 @@ if (sessionStorage.getItem("registered") === "true") {
 document.getElementById("regForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const fullname = document.getElementById("fullname").value.trim();
-  const phone = document.getElementById("phone").value.trim();
+  const fullnameEl = document.getElementById("fullname");
+  const phoneEl    = document.getElementById("phone");
+  const msgEl      = document.getElementById("message");
+
+  const fullname = fullnameEl.value.trim();
+  const phone    = phoneEl.value.trim();
 
   if (!fullname || !phone) {
-    document.getElementById("message").innerHTML = "Vui lòng điền đầy đủ thông tin!";
-    document.getElementById("message").style.color = "red";
+    msgEl.innerHTML  = "Vui lòng điền đầy đủ thông tin!";
+    msgEl.style.color = "red";
     return;
   }
+
+  // Vô hiệu hoá nút trong lúc gửi
+  const btn = this.querySelector("button");
+  btn.disabled    = true;
+  btn.textContent = "Đang gửi...";
 
   const scriptURL = "https://script.google.com/macros/s/AKfycby7WPC-wzTndTft43sIZVz6Rup1hRAdQ5bH3cT9z9ZIdkfuWtz8EfhHf2Az5Pz1kroi/exec";
 
@@ -1061,22 +1070,30 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
     mode: 'no-cors'
   })
   .then(() => {
-    document.getElementById("message").innerHTML = "Đăng ký thành công! Cảm ơn bạn đã tham gia.";
-    document.getElementById("message").style.color = "green";
-
-    // Lưu trạng thái đã đăng ký vào sessionStorage
+    // Lưu trạng thái đã đăng ký
     sessionStorage.setItem("registered", "true");
 
+    // Xoá nội dung form
+    fullnameEl.value = "";
+    phoneEl.value    = "";
+    btn.textContent  = "ĐĂNG KÝ THAM DỰ";
+    btn.disabled     = false;
+
+    // Thông báo thành công rồi đóng popup, vào nội dung trang
+    msgEl.innerHTML  = "✅ Đăng ký thành công! Cảm ơn bạn đã tham gia.";
+    msgEl.style.color = "green";
+
     setTimeout(() => {
-      window.location.href = "https://www.facebook.com/dieutuongam.nghethuatphatgiao";
-    }, 1800);
+      document.getElementById("registerPopup").style.display = "none";
+    }, 1500);
   })
   .catch((error) => {
     console.error('Error!', error.message);
-    document.getElementById("message").innerHTML = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
-    document.getElementById("message").style.color = "red";
+    msgEl.innerHTML  = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
+    msgEl.style.color = "red";
+    btn.textContent  = "ĐĂNG KÝ THAM DỰ";
+    btn.disabled     = false;
   });
-});
-</script>
+});</script>
 </body>
 </html>
