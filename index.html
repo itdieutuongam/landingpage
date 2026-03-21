@@ -52,15 +52,7 @@
     from { transform: scale(0.8); opacity: 0; }
     to   { transform: scale(1); opacity: 1; }
   }
-  .close-btn {
-    position: absolute;
-    top: 12px;
-    right: 16px;
-    font-size: 28px;
-    cursor: pointer;
-    color: #999;
-  }
-  .close-btn:hover { color: #d32f2f; }
+
   h2 {
     text-align: center;
     color: #c62828;
@@ -659,7 +651,7 @@
         <div class="info-grid">
           <div class="info-item">
             <h3 style="color:#c62828">Địa điểm</h3>
-            <p>382 Nam Kỳ Khởi Nghĩa, P. Xuân Hòa, Hồ Chí Minh</p>
+            <p>382 Nam Kỳ Khởi Nghĩa, P. Võ Thị Sáu, Q.3, TP.HCM</p>
           </div>
           <div class="info-item">
             <h3 style="color:#c62828">Thời gian</h3>
@@ -774,7 +766,7 @@
         </div>
         <div class="card-content">
           <ul>
-            <li>Lân sư rồng – trống hội khai xuân </li>
+            <li>Lân sư rồng – trống hội khai xuân sdfsdfsdfsdfsdfffffffffffffffffffffffffffffsfsdfsfsdfsfsfsf</li>
             <li>Lân nhả ngọc – tấn lộc đầu năm</li>
             <li>Trải nghiệm cổ phục Việt</li>
             <li>Ông đồ cho chữ đầu năm</li>
@@ -837,6 +829,7 @@
     <div class="footer-social">
       <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
       <a href="https://www.youtube.com/c/dieutuongamnghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Bocongthuong.png" class="bct">
     </div>
 
     <p class="footer-copy">
@@ -847,11 +840,6 @@
 </footer>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-// Đóng popup
-function closePopup() {
-  document.getElementById("registerPopup").style.display = "none";
-}
-
 // Toggle preview social
 function showPreview(platform) {
   // Ẩn tất cả preview
@@ -865,6 +853,11 @@ function showPreview(platform) {
     preview.classList.add('active');
     preview.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }
+}
+
+// Nếu đã đăng ký rồi thì ẩn popup luôn, không cần nhập lại
+if (sessionStorage.getItem("registered") === "true") {
+  document.getElementById("registerPopup").style.display = "none";
 }
 
 // Xử lý form đăng ký
@@ -894,6 +887,9 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
   .then(() => {
     document.getElementById("message").innerHTML = "Đăng ký thành công! Cảm ơn bạn đã tham gia.";
     document.getElementById("message").style.color = "green";
+
+    // Lưu trạng thái đã đăng ký vào sessionStorage
+    sessionStorage.setItem("registered", "true");
 
     setTimeout(() => {
       window.location.href = "https://www.facebook.com/dieutuongam.nghethuatphatgiao";
