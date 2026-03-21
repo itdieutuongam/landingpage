@@ -588,39 +588,49 @@
 </footer>
 
 <script>
-// Đếm ngược đến 07/02/2025
-setInterval(updateCountdown, 1000);
-updateCountdown();
 
 // Đóng popup
 function closePopup() {
   document.getElementById("registerPopup").style.display = "none";
 }
 
-// Gửi form (thay YOUR_SCRIPT_ID bằng Google Apps Script thật)
+// Xử lý form
 document.getElementById("regForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
-  const fullname = document.getElementById("fullname").value;
-  const phone = document.getElementById("phone").value;
-  const date = document.getElementById("date").value;
+  const fullname = document.getElementById("fullname").value.trim();
+  const phone = document.getElementById("phone").value.trim();
 
-  const scriptURL = "https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec";
+  if (!fullname || !phone) {
+    document.getElementById("message").innerHTML = "Vui lòng điền đầy đủ thông tin!";
+    document.getElementById("message").style.color = "red";
+    return;
+  }
+
+  const scriptURL = "https://script.google.com/macros/s/AKfycby7WPC-wzTndTft43sIZVz6Rup1hRAdQ5bH3cT9z9ZIdkfuWtz8EfhHf2Az5Pz1kroi/exec";  // ← DÁN URL WEB APP VÀO ĐÂY
+
+  const formData = new FormData();
+  formData.append("fullname", fullname);
+  formData.append("phone", phone);
 
   fetch(scriptURL, {
     method: 'POST',
-    mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ fullname, phone, date })
+    body: formData,                // Dùng FormData → tự động gửi application/x-www-form-urlencoded
+    mode: 'no-cors'                // Quan trọng: tránh lỗi CORS
   })
   .then(() => {
+    // Vì no-cors nên không đọc được response, nhưng thường thành công nếu deploy đúng
     document.getElementById("message").innerHTML = "Đăng ký thành công! Đang chuyển hướng...";
+    document.getElementById("message").style.color = "green";
+
     setTimeout(() => {
       window.location.href = "https://www.facebook.com/dieutuongam.nghethuatphatgiao";
-    }, 1500);
+    }, 1800);
   })
-  .catch(() => {
+  .catch((error) => {
+    console.error('Error:', error);
     document.getElementById("message").innerHTML = "Có lỗi xảy ra, vui lòng thử lại!";
+    document.getElementById("message").style.color = "red";
   });
 });
 </script>
