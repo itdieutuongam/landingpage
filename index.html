@@ -82,18 +82,61 @@
   button:hover { background: linear-gradient(90deg, #b71c1c, #d32f2f); }
   #message { text-align:center; margin-top:12px; font-weight:bold; }
 
-  /* Header */
+  /* Header - ảnh full màn hình lớn */
   header {
-    background: linear-gradient(135deg, #c62828, #e53935);
+    background-color: #1a0000;
     color: white;
     text-align: center;
-    padding: 60px 20px 40px;
     position: relative;
+    width: 100%;
+    min-height: clamp(320px, 55vw, 600px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    padding: 40px 20px;
+  }
+  header .header-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.30) 0%,
+      rgba(120,5,5,0.50) 50%,
+      rgba(0,0,0,0.72) 100%
+    );
+    z-index: 1;
+  }
+  header h1,
+  header h2 {
+    position: relative;
+    z-index: 2;
   }
   header h1 {
-    font-size: 2.8rem;
-    margin-bottom: 12px;
-    text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    font-size: clamp(1.8rem, 5.5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,1);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+  header h2 {
+    font-size: clamp(1rem, 3vw, 1.8rem) !important;
+    font-weight: 400;
+    letter-spacing: 0.10em;
+    text-shadow: 0 1px 10px rgba(0,0,0,0.8);
+    opacity: 0.96;
   }
 
   /* Festival Section */
@@ -249,24 +292,24 @@
   }
 
   /* Các style còn lại giữ nguyên như cũ (event-card, footer, popup, v.v.) */
-/* Grid xếp dọc, responsive */
+  /* Grid xếp dọc, responsive */
   .events-grid {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 24px;
     width: 100%;
     max-width: 950px;
     margin: 40px auto;
     box-sizing: border-box;
+    padding: 0 16px;
   }
 
   .event-card {
     background: white;
     color: #333;
     width: 100%;
-    min-height: 220px;
     height: auto;
-    overflow: visible;
+    overflow: hidden;
     font-size: 1.0rem;
     display: flex;
     flex-direction: column;
@@ -278,65 +321,104 @@
   .event-card + .event-card {
     border-left: none;
   }
-  /* Header nhỏ hơn */
+
+  /* Header */
   .card-header {
-    padding: 20px 24px;
+    padding: 18px 22px;
     gap: 14px;
     display: flex;
     align-items: center;
     background: #ffffff;
-    color: white;
+    border-bottom: 2px solid #f5e6e6;
     text-align: left;
+    flex-shrink: 0;
   }
 
   .calendar-icon {
-    font-size: 2.6rem;                        /* giảm từ 3.8rem → nhỏ hơn nhiều */
+    font-size: 2rem;
+    flex-shrink: 0;
   }
 
   .card-header h3 {
-    font-size: 1.2rem;
+    font-size: clamp(0.95rem, 2.5vw, 1.2rem);
     text-align: left;
     color: rgb(0, 0, 0);
     margin: 0;
+    line-height: 1.4;
+    word-break: break-word;
   }
 
-  /* Nội dung nhỏ hơn */
+  /* Nội dung */
   .card-content {
-    padding: 20px 24px;
+    padding: 18px 22px;
     text-align: left;
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-sizing: border-box;
   }
 
   .card-content ul {
-    margin: 0 0 12px 0;
+    margin: 0 0 8px 0;
     padding-left: 0;
     list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px 20px;
   }
 
   .card-content li {
-    font-size: 0.98rem;
-    margin-bottom: 10px;
-    padding-left: 20px;
+    font-size: clamp(0.82rem, 1.8vw, 0.98rem);
+    margin-bottom: 0;
+    padding-left: 18px;
     position: relative;
     text-align: left;
+    line-height: 1.5;
+    word-break: break-word;
   }
 
-  .card-content li:before {
-    font-size: 1.8rem;                        /* điều chỉnh dấu chấm cho cân đối */
+  .card-content li::before {
+    content: '•';
+    position: absolute;
+    left: 4px;
+    top: 0;
+    font-size: 1rem;
+    color: #c62828;
+    line-height: 1.5;
   }
 
   /* Phần thời gian */
   .time {
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
     padding-top: 12px;
-    margin-top: 16px;
+    margin-top: 14px;
     text-align: left;
     font-weight: 600;
     color: #c62828;
     border-top: 1px solid #eee;
+    flex-shrink: 0;
+  }
+
+  /* Mobile: 1 cột */
+  @media (max-width: 600px) {
+    .events-grid {
+      padding: 0 12px;
+      gap: 16px;
+    }
+    .card-content ul {
+      grid-template-columns: 1fr;
+      gap: 4px;
+    }
+    .card-header {
+      padding: 14px 16px;
+    }
+    .card-content {
+      padding: 14px 16px;
+    }
+    .calendar-icon {
+      font-size: 1.6rem;
+    }
   }
 
   /* Main content */
@@ -385,47 +467,98 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
 
+  /* ── GALLERY 4 ảnh lớn ── */
+  .activities-gallery {
+    width: 100%;
+  }
   .activities-gallery .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: auto auto;
     gap: 20px;
   }
   .gallery-item {
     position: relative;
     overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-    aspect-ratio: 1 / 1;
-    background: #000;
+    border-radius: 18px;
+    box-shadow: 0 10px 36px rgba(0,0,0,0.28);
+    background: #111;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+  }
+  /* Ảnh tỉ lệ 3:2 - to, rõ ràng */
+  .gallery-item .img-wrap {
+    position: relative;
+    aspect-ratio: 3 / 2;
+    overflow: hidden;
+    flex-shrink: 0;
+    width: 100%;
   }
   .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.4s ease;
+    display: block;
+    transition: transform 0.55s ease;
   }
   .gallery-item:hover img {
-    transform: scale(1.08);
+    transform: scale(1.07);
   }
-  .caption {
+  /* Gradient overlay trên ảnh */
+  .gallery-item .img-wrap::after {
+    content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0,0,0,0.55) 0%,
+      transparent 55%
+    );
+    pointer-events: none;
+  }
+  /* Caption dưới ảnh */
+  .caption {
+    background: #160000;
+    border-top: 2px solid rgba(198,40,40,0.6);
     color: white;
-    padding: 20px 15px 15px;
+    padding: 18px 16px 20px;
     text-align: center;
+    flex-shrink: 0;
   }
   .caption h3 {
-    font-size: 1.3rem;
+    font-size: clamp(0.88rem, 1.5vw, 1.08rem);
     margin: 0 0 8px;
+    line-height: 1.3;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
   }
   .caption p {
-    font-size: 0.95rem;
+    font-size: clamp(0.74rem, 1.1vw, 0.86rem);
     margin: 0;
-    opacity: 0.9;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.55;
+  }
+
+  @media (max-width: 700px) {
+    .activities-gallery .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .gallery-item .img-wrap {
+      aspect-ratio: 1 / 1;
+    }
+    .caption {
+      padding: 12px 10px 14px;
+    }
+    .caption h3 {
+      font-size: clamp(0.75rem, 3.2vw, 0.92rem);
+      margin-bottom: 5px;
+    }
+    .caption p {
+      font-size: clamp(0.66rem, 2.5vw, 0.78rem);
+    }
   }
 
   /* Social Links & Preview */
@@ -501,31 +634,60 @@
     color: #ffecb3;
   }
 
-  /* Responsive */
+  /* ── Responsive ── */
   @media (max-width: 900px) {
     .two-parts-wrapper {
       grid-template-columns: 1fr;
-      gap: 50px;
+      gap: 24px;
     }
-    .gallery-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 15px;
+    .container {
+      padding: 0 16px;
     }
-    .gallery-item {
-      aspect-ratio: 4 / 3;
+    h2.section-title {
+      font-size: 1.5rem;
+    }
+    .event-info {
+      padding: 24px 20px;
     }
     .social-links {
-      gap: 30px;
+      gap: 24px;
     }
     .social-links img {
-      width: 60px;
-      height: 60px;
+      width: 54px;
+      height: 54px;
+    }
+    /* Gallery: 2 cột giữ nguyên trên tablet */
+    .activities-gallery .gallery-grid {
+      gap: 14px;
+    }
+    /* Header mobile */
+    header h1 {
+      font-size: clamp(1.6rem, 6vw, 2.4rem);
+    }
+    header h2 {
+      font-size: clamp(0.95rem, 3.5vw, 1.4rem);
+    }
+    /* Festival title */
+    .festival-title {
+      font-size: clamp(1.3rem, 5vw, 2rem);
+    }
+    .festival-title .highlight {
+      font-size: clamp(0.9rem, 3vw, 1.2rem);
     }
   }
 
   @media (max-width: 600px) {
     .preview-grid {
       grid-template-columns: 1fr;
+    }
+    section {
+      padding: 36px 0;
+    }
+    .info-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .event-info p {
+      font-size: 0.95rem;
     }
   }
 
@@ -635,8 +797,9 @@
 
 <!-- HEADER -->
 <header>
+  <img class="header-img" src="image/background.jpg" alt="Nghênh Xuân Kiến Hỷ">
   <h1>NGHÊNH XUÂN KIẾN HỶ</h1>
-  <h2 style="font-size:1.8rem; margin:20px 0; color: #ffffff;">LỄ RƯỚC LỘC ĐẦU NĂM</h2>
+  <h2 style="margin:16px 0; color:#ffffff;">LỄ RƯỚC LỘC ĐẦU NĂM</h2>
 </header>
 
 <div class="container">
@@ -669,15 +832,19 @@
       <div class="activities-gallery">
         <div class="gallery-grid">
           <div class="gallery-item">
-            <img src="https://statics.vinpearl.com/T%C3%B2-he-03_1708530446.jpg" alt="TRẢI NGHIỆM NẶN TÒ HE">
+            <div class="img-wrap">
+              <img src="image/1.jpg" alt="TRẢI NGHIỆM NẶN TÒ HE" loading="lazy">
+            </div>
             <div class="caption">
-              <h3>TRẢI NGHIỆM NẶN <br> TÒ HE</h3>
+              <h3>TRẢI NGHIỆM NẶN TÒ HE</h3>
               <p>Món đồ chơi dân gian thuần chất thôn quê Bắc Bộ đã đi vào đời sống tinh thần của biết bao thế hệ</p>
             </div>
           </div>
 
           <div class="gallery-item">
-            <img src="https://i.ytimg.com/vi/_idk7PQDni8/maxresdefault.jpg" alt="XẾP LÁ DỪA NGHỆ THUẬT">
+            <div class="img-wrap">
+              <img src="image/2.jpg" alt="XẾP LÁ DỪA NGHỆ THUẬT" loading="lazy">
+            </div>
             <div class="caption">
               <h3>XẾP LÁ DỪA NGHỆ THUẬT</h3>
               <p>Sống lại ký ức tuổi thơ miền sông nước, thứ thú vui bình dị, mộc mạc vẫn có sức hấp dẫn rất riêng</p>
@@ -685,7 +852,9 @@
           </div>
 
           <div class="gallery-item">
-            <img src="https://i.ytimg.com/vi/c5zWlPYQ0ZQ/maxresdefault.jpg" alt="BIỂU DIỄN LÂN SƯ RỒNG">
+            <div class="img-wrap">
+              <img src="image/3.jpg" alt="BIỂU DIỄN LÂN SƯ RỒNG NGHỆ THUẬT" loading="lazy">
+            </div>
             <div class="caption">
               <h3>BIỂU DIỄN LÂN SƯ RỒNG NGHỆ THUẬT</h3>
               <p>Rộn ràng trống hội gọi xuân về, cùng các tiết mục biểu diễn hấp dẫn: TỨ QUÝ HƯNG LONG, MAI HOA THUNG, LÂN CHẦU PHẬT,...</p>
@@ -693,7 +862,9 @@
           </div>
 
           <div class="gallery-item">
-            <img src="https://lenjourneys.com/wp-content/uploads/2017/01/tet-21.jpg" alt="NGHỆ THUẬT THƯ PHÁP VIỆT">
+            <div class="img-wrap">
+              <img src="image/4.jpg" alt="NGHỆ THUẬT THƯ PHÁP VIỆT" loading="lazy">
+            </div>
             <div class="caption">
               <h3>NGHỆ THUẬT THƯ PHÁP VIỆT</h3>
               <p>Xin chữ đầu năm trên quạt An Phong - Tứ Quý - Như Ý. Nguyện mang theo hơi thở từ bi và trí tuệ, thổi vào đời những nhịp an vui</p>
@@ -743,7 +914,7 @@
             <!-- Embed video đại diện hoặc mới nhất (thay v= bằng ID video thực tế từ kênh) -->
             <iframe src="https://www.youtube.com/embed/vUrLdPGsF5U?rel=0" title="Diệu Tướng Am Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
-          <a href="https://www.youtube.com/c/dieutuongamnghethuatphatgiao" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
+          <a href="http://www.youtube.com/@dieutuongamnghethuatphatgiao?sub_confirmation=1" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
         </div>
 
         <!-- TikTok Preview -->
@@ -772,7 +943,7 @@
         </div>
         <div class="card-content">
           <ul>
-            <li>Lân sư rồng – trống hội khai xuân <br>sdfsdfsdfsdfsdfffffffffffffffffffffffffffffsfs<br>dfsfsdfsfsfsf</li>
+            <li>Lân sư rồng – trống hội khai xuân</li>
             <li>Lân nhả ngọc – tấn lộc đầu năm</li>
             <li>Trải nghiệm cổ phục Việt</li>
             <li>Ông đồ cho chữ đầu năm</li>
@@ -827,7 +998,7 @@
     </p>
 
     <p class="footer-highlight">19006601</p>
-    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153"><span class="__cf_email__" data-cfemail="066f68606946626f63737273696861676b2865696b">[email&#160;protected]</span></a></p>
+    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153"><span class="__cf_email__" data-cfemail="066f68606946626f63737273696861676b2865696b">info@dieutuongam.com</span></a></p>
     <p class="footer-highlight">8H30 - 20H00</p>
 
     <div class="footer-line"></div>
@@ -835,7 +1006,6 @@
     <div class="footer-social">
       <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
       <a href="https://www.youtube.com/c/dieutuongamnghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Bocongthuong.png" class="bct">
     </div>
 
     <p class="footer-copy">
@@ -903,7 +1073,7 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
   })
   .catch((error) => {
     console.error('Error!', error.message);
-    document.getElementById("message").innerHTML = "Đã có lỗi xảy ra. Vui lòng thử lại.";
+    document.getElementById("message").innerHTML = "Đã có lỗi xảy ra. Vui lòng thử lại sau.";
     document.getElementById("message").style.color = "red";
   });
 });
