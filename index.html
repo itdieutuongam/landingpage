@@ -406,12 +406,6 @@
     <form id="regForm">
       <input type="text" id="fullname" placeholder="Họ và tên" required>
       <input type="tel" id="phone" placeholder="Số điện thoại" pattern="^0[0-9]{9}$" required>
-      <select id="date" required>
-        <option value="">Chọn ngày tham dự</option>
-        <option value="07/02/2025">07/02/2025 (Mùng 10 Tết)</option>
-        <option value="08/02/2025">08/02/2025</option>
-        <option value="09/02/2025">09/02/2025</option>
-      </select>
       <button type="submit">ĐĂNG KÝ THAM DỰ</button>
     </form>
     <div id="message"></div>
@@ -595,26 +589,6 @@
 
 <script>
 // Đếm ngược đến 07/02/2025
-const countDownDate = new Date("Feb 7, 2025 00:00:00").getTime();
-
-function updateCountdown() {
-  const now = new Date().getTime();
-  const distance = countDownDate - now;
-
-  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-  const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-  document.getElementById("days").innerText = days.toString().padStart(2,'0');
-  document.getElementById("hours").innerText = hours.toString().padStart(2,'0');
-  document.getElementById("minutes").innerText = minutes.toString().padStart(2,'0');
-  document.getElementById("seconds").innerText = seconds.toString().padStart(2,'0');
-
-  if (distance < 0) {
-    document.querySelector(".countdown").innerHTML = "SỰ KIỆN ĐÃ BẮT ĐẦU!";
-  }
-}
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
