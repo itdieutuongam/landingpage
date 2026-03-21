@@ -11,7 +11,6 @@
   <style>
   * { margin:0; padding:0; box-sizing:border-box; }
 
-  /* Áp dụng Roboto cho TOÀN BỘ trang - ghi đè triệt để */
   body, html,
   h1, h2, h3, h4, h5, h6,
   p, span, div, li, a, strong, small,
@@ -104,21 +103,8 @@
     margin-bottom: 12px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
   }
-  .countdown {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    margin: 30px 0;
-    font-size: 1.4rem;
-  }
-  .countdown div {
-    background: rgba(255,255,255,0.2);
-    padding: 12px 20px;
-    border-radius: 12px;
-    min-width: 80px;
-  }
 
-  /* Festival Section - Layout đỏ */
+  /* Festival Section */
   .festival-section {
     background: #c62828;
     color: white;
@@ -131,7 +117,7 @@
   }
   .festival-title {
     font-size: 2.8rem;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
     line-height: 1.2;
   }
   .festival-title .highlight {
@@ -141,75 +127,218 @@
     display: block;
     margin-bottom: 16px;
   }
-  .events-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
+
+  /* Social Links & Previews (hiển thị trực tiếp luôn) */
+  .social-section {
+    margin: 40px 0;
   }
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+  .social-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  .social-links a:hover {
+    transform: scale(1.15);
+  }
+  .social-links img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .social-links .label {
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .social-previews {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    align-items: start;
+  }
+  .preview-block {
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    display: flex;
+    flex-direction: column;
+  }
+  .preview-title {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #ffecb3;
+    text-align: center;
+    min-height: 2.8em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .preview-content {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    height: 300px;
+    display: flex;
+    align-items: stretch;
+  }
+  .preview-content iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+    display: block;
+    flex-shrink: 0;
+  }
+  /* TikTok container chiều cao cố định */
+  .tiktok-wrapper {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+  }
+  .tiktok-wrapper .tiktok-embed {
+    margin: 0 !important;
+    max-width: 100% !important;
+    min-width: unset !important;
+    width: 100% !important;
+    transform-origin: top center;
+    transform: scale(0.85);
+  }
+  .more-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    padding: 12px;
+    background: #fff;
+    color: #c62828;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 8px;
+  }
+  .more-link:hover {
+    background: #ffecb3;
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .social-previews {
+      grid-template-columns: 1fr;
+    }
+    .social-links {
+      gap: 30px;
+    }
+    .social-links img {
+      width: 60px;
+      height: 60px;
+    }
+    .preview-title {
+      min-height: unset;
+    }
+  }
+
+  /* Các style còn lại giữ nguyên như cũ (event-card, footer, popup, v.v.) */
+/* Grid xếp dọc, mỗi card 800x500px */
+  .events-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 950px;
+    margin: 40px auto;
+  }
+
   .event-card {
     background: white;
     color: #333;
-    border-radius: 16px;
+    width: 950px;
+    height: 500px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    text-align: left;
+    font-size: 1.0rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: 16px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.25);
   }
+
+  .event-card + .event-card {
+    border-left: none;
+  }
+  /* Header nhỏ hơn */
   .card-header {
-    background: #fffaf0;
-    padding: 24px;
+    padding: 20px 24px;
+    gap: 14px;
     display: flex;
     align-items: center;
-    gap: 20px;
-    border-bottom: 1px solid #eee;
+    background: #ffffff;
+    color: white;
+    text-align: left;
   }
+
   .calendar-icon {
-    font-size: 3.8rem;
-    line-height: 1;
+    font-size: 2.6rem;                        /* giảm từ 3.8rem → nhỏ hơn nhiều */
   }
+
   .card-header h3 {
-    font-size: 1.6rem;
-    color: #c62828;
+    font-size: 1.2rem;
+    text-align: left;
+    color: rgb(0, 0, 0);
     margin: 0;
-    line-height: 1.3;
   }
+
+  /* Nội dung nhỏ hơn */
   .card-content {
-    padding: 24px;
+    padding: 20px 24px;
+    text-align: left;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
+
   .card-content ul {
+    margin: 0 0 12px 0;
+    padding-left: 0;
     list-style: none;
-    padding: 0;
-    margin: 0 0 20px 0;
   }
+
   .card-content li {
-    margin-bottom: 12px;
-    font-size: 1.05rem;
+    font-size: 0.98rem;
+    margin-bottom: 10px;
+    padding-left: 20px;
     position: relative;
-    padding-left: 28px;
+    text-align: left;
   }
+
   .card-content li:before {
-    content: "•";
-    color: #e53935;
-    position: absolute;
-    left: 4px;
-    font-size: 2rem;
-    line-height: 1;
+    font-size: 1.8rem;                        /* điều chỉnh dấu chấm cho cân đối */
   }
+
+  /* Phần thời gian */
   .time {
-    font-size: 1.25rem;
-    font-weight: bold;
+    font-size: 1.1rem;
+    padding-top: 12px;
+    margin-top: 16px;
+    text-align: left;
+    font-weight: 600;
     color: #c62828;
-    text-align: center;
-    margin-top: 20px;
-    padding-top: 16px;
-    border-top: 1px dashed #ddd;
-  }
-  .event-subtitle {
-    font-size: 1.6rem;
-    font-weight: 500;
-    margin-top: 30px;
-  }
-  .event-subtitle strong {
-    color: #ffecb3;
+    border-top: 1px solid #eee;
   }
 
   /* Main content */
@@ -228,7 +357,6 @@
     margin-bottom: 40px;
   }
 
-  /* Hai phần song song */
   .two-parts-wrapper {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -302,6 +430,79 @@
     opacity: 0.9;
   }
 
+  /* Social Links & Preview */
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 40px 0 20px;
+    flex-wrap: wrap;
+  }
+  .social-links a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    font-size: 1.1rem;
+    transition: transform 0.3s;
+    cursor: pointer;
+  }
+  .social-links a:hover {
+    transform: scale(1.15);
+  }
+  .social-links img {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .social-links .label {
+    margin-top: 10px;
+    font-weight: 500;
+  }
+
+  .social-preview {
+    display: none;
+    margin: 30px 0;
+    padding: 25px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 16px;
+    backdrop-filter: blur(5px);
+  }
+  .social-preview.active {
+    display: block;
+  }
+  .preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    margin-top: 25px;
+  }
+  .preview-item {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s;
+  }
+  .preview-item:hover {
+    transform: translateY(-5px);
+  }
+  .preview-item iframe,
+  .preview-item img {
+    width: 100%;
+    height: 220px;
+    border: none;
+  }
+  .preview-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: #ffecb3;
+  }
+
   /* Responsive */
   @media (max-width: 900px) {
     .two-parts-wrapper {
@@ -315,11 +516,18 @@
     .gallery-item {
       aspect-ratio: 4 / 3;
     }
-    .events-grid {
-      grid-template-columns: 1fr;
+    .social-links {
+      gap: 30px;
     }
-    .festival-title {
-      font-size: 2.3rem;
+    .social-links img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .preview-grid {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -331,21 +539,16 @@
   }
   .footer-container {
     max-width: 1200px;
-    margin-left: 150px;
-    margin-top: 6px;
-  }
-  .footer-title,
-  .footer-subtitle {
-    margin: 0;
-    padding: 0;
-    line-height: 1.1;
-  }
-  .footer-title + .footer-subtitle {
-    margin-top: 8px;
+    margin: 0 auto;
+    padding: 0 20px;
   }
   .footer-title {
     font-size: 48px;
     color: #ffffff;
+  }
+  .footer-subtitle {
+    font-size: 1.1rem;
+    margin-top: 8px;
   }
   .footer-line {
     width: 120px;
@@ -386,13 +589,33 @@
   }
 
   @media (max-width: 768px) {
-    .footer-container {
-      margin-left: 20px;
-      margin-right: 20px;
-    }
     .footer-title {
       font-size: 32px;
     }
+  }
+
+  .social-previews .more-link {
+  display: block;
+  text-align: center;
+  margin-top: 20px;        /* tăng khoảng cách với nội dung phía trên nếu cần */
+  padding: 14px 20px;      /* padding đều hơn */
+  background: #fff;
+  color: #c62828;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  font-size: 1.05rem;      /* kích thước chữ đồng đều */
+  width: fit-content;      /* chỉ rộng vừa đủ nội dung */
+  margin-left: auto;
+  margin-right: auto;      /* căn giữa hoàn hảo */
+  min-width: 220px;        /* đảm bảo 3 nút có chiều rộng tối thiểu giống nhau */
+  box-sizing: border-box;
+  transition: all 0.3s;
+  }
+
+  .social-previews .more-link:hover {
+  background: #ffecb3;
+  transform: translateY(-2px);
   }
   </style>
 </head>
@@ -401,7 +624,7 @@
 <!-- POPUP ĐĂNG KÝ -->
 <div id="registerPopup">
   <div class="popup-content">
-    <span class="close-btn" onclick="closePopup()">×</span>
+
     <h2>THAM GIA SỰ KIỆN</h2>
     <form id="regForm">
       <input type="text" id="fullname" placeholder="Họ và tên" required>
@@ -425,7 +648,6 @@
 
     <div class="two-parts-wrapper">
 
-      <!-- Bên trái: Nội dung + Địa điểm & Thời gian -->
       <div class="event-info">
         <p>
           Nhân ngày vía Thần Tài mùng 10 Tết Ất Tỵ, Diệu Tướng Am trân trọng kính mời quý khách, những người hữu duyên cùng tham dự <strong>Lễ Rước Lộc Đầu Năm</strong> tại không gian Văn hóa Nghệ thuật Phật giáo Diệu Tướng Am, TP. Hồ Chí Minh.
@@ -437,7 +659,7 @@
         <div class="info-grid">
           <div class="info-item">
             <h3 style="color:#c62828">Địa điểm</h3>
-            <p>382 Nam Kỳ Khởi Nghĩa, P. Võ Thị Sáu, Q.3, TP.HCM</p>
+            <p>382 Nam Kỳ Khởi Nghĩa, P. Xuân Hòa, Hồ Chí Minh</p>
           </div>
           <div class="info-item">
             <h3 style="color:#c62828">Thời gian</h3>
@@ -446,13 +668,12 @@
         </div>
       </div>
 
-      <!-- Bên phải: Grid 4 hình vuông -->
       <div class="activities-gallery">
         <div class="gallery-grid">
           <div class="gallery-item">
             <img src="https://statics.vinpearl.com/T%C3%B2-he-03_1708530446.jpg" alt="TRẢI NGHIỆM NẶN TÒ HE">
             <div class="caption">
-              <h3>TRẢI NGHIỆM NẶN TÒ HE</h3>
+              <h3>TRẢI NGHIỆM NẶN <br> TÒ HE</h3>
               <p>Món đồ chơi dân gian thuần chất thôn quê Bắc Bộ đã đi vào đời sống tinh thần của biết bao thế hệ</p>
             </div>
           </div>
@@ -489,14 +710,60 @@
 </div>
 
 <!-- PHẦN LỄ HỘI TẾT - LAYOUT ĐỎ -->
-<section class="festival-section">
-  <div class="festival-container">
-
-    <h2 class="festival-title">
+<section class="festival-section"><h2 class="festival-title">
       <span class="highlight">Những hoạt động không thể bỏ lỡ</span>
       <span class="main-title">LỄ HỘI TẾT DIỆU TƯỚNG AM</span>
     </h2>
 
+    <div class="social-section">
+
+      <!-- Previews hiển thị trực tiếp luôn -->
+      <div class="social-previews">
+        <!-- Facebook Preview -->
+        <div class="preview-block" id="fb-preview">
+          <h3 class="preview-title">Khoảnh khắc mới nhất từ Facebook</h3>
+          <div class="preview-content">
+            <!-- Embed post mới nhất hoặc đại diện (thay href nếu có post mới) -->
+          <iframe 
+            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdieutuongam.nghethuatphatgiao%2Fvideos%2F1196280665501159%2F&width=500&show_text=false&height=280&t=0" 
+            width="500" 
+            height="280" 
+            style="border:none;overflow:hidden" 
+            scrolling="no" 
+            frameborder="0" 
+            allowfullscreen="true" 
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+          </iframe>
+          </div>
+          <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank" class="more-link">Xem thêm trên Facebook →</a>
+        </div>
+
+        <!-- YouTube Preview -->
+        <div class="preview-block" id="yt-preview">
+          <h3 class="preview-title">Video mới nhất từ YouTube</h3>
+          <div class="preview-content">
+            <!-- Embed video đại diện hoặc mới nhất (thay v= bằng ID video thực tế từ kênh) -->
+            <iframe src="https://www.youtube.com/embed/vUrLdPGsF5U?rel=0" title="Diệu Tướng Am Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <a href="https://www.youtube.com/c/dieutuongamnghethuatphatgiao" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
+        </div>
+
+        <!-- TikTok Preview -->
+        <div class="preview-block" id="tt-preview">
+          <h3 class="preview-title">Video ngắn từ TikTok</h3>
+          <div class="preview-content">
+            <div class="tiktok-wrapper">
+              <!-- Embed video TikTok mới (thay video-id và cite bằng video thực tế) -->
+              <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@dieu_tuong_am/video/7495389202897538311" data-video-id="7495389202897538311" style="max-width: 100%; width:100%;">
+                <section> <a target="_blank" title="@dieu_tuong_am" href="https://www.tiktok.com/@dieu_tuong_am">@dieu_tuong_am</a> </section>
+              </blockquote>
+              <script async src="https://www.tiktok.com/embed.js"></script>
+            </div>
+          </div>
+          <a href="https://www.tiktok.com/@dieu_tuong_am" target="_blank" class="more-link">Xem thêm trên TikTok →</a>
+        </div>
+      </div>
+    </div>
     <div class="events-grid">
 
       <!-- CARD TOP -->
@@ -507,7 +774,7 @@
         </div>
         <div class="card-content">
           <ul>
-            <li>Lân sư rồng – trống hội khai xuân</li>
+            <li>Lân sư rồng – trống hội khai xuân </li>
             <li>Lân nhả ngọc – tấn lộc đầu năm</li>
             <li>Trải nghiệm cổ phục Việt</li>
             <li>Ông đồ cho chữ đầu năm</li>
@@ -551,7 +818,7 @@
 
     <h3 class="footer-heading">ĐỊA CHỈ</h3>
     <p class="footer-text">
-      Showroom Hồ Chí Minh: 382 Nam Kỳ Khởi Nghĩa, P. Xuân Hòa, Hồ Chí Min
+      Showroom Hồ Chí Minh: 382 Nam Kỳ Khởi Nghĩa, P. Xuân Hòa, Hồ Chí Minh
     </p>
     <p class="footer-text">
       Showroom Hà Nội: 252 Bà Triệu, P. Hai Bà Trưng, Hà Nội
@@ -562,15 +829,14 @@
     </p>
 
     <p class="footer-highlight">19006601</p>
-    <p class="footer-highlight">info@nghethuatphatgiao.com</p>
+    <p class="footer-highlight"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="3e575058517e5059565b4a564b5f4a4e565f4a59575f51105d5153">info@dieutuongam.com</a></p>
     <p class="footer-highlight">8H30 - 20H00</p>
 
     <div class="footer-line"></div>
 
     <div class="footer-social">
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
-      <a href="#"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
-      <img src="https://upload.wikimedia.org/wikipedia/commons/8/8c/Bocongthuong.png" class="bct">
+      <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/733/733547.png"></a>
+      <a href="https://www.youtube.com/c/dieutuongamnghethuatphatgiao" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"></a>
     </div>
 
     <p class="footer-copy">
@@ -580,14 +846,28 @@
   </div>
 </footer>
 
-<script>
-
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // Đóng popup
 function closePopup() {
   document.getElementById("registerPopup").style.display = "none";
 }
 
-// Xử lý form
+// Toggle preview social
+function showPreview(platform) {
+  // Ẩn tất cả preview
+  document.querySelectorAll('.social-preview').forEach(el => {
+    el.classList.remove('active');
+  });
+
+  // Hiện preview được chọn
+  const preview = document.getElementById(platform + '-preview');
+  if (preview) {
+    preview.classList.add('active');
+    preview.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+// Xử lý form đăng ký
 document.getElementById("regForm").addEventListener("submit", function(e) {
   e.preventDefault();
 
@@ -600,7 +880,7 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
     return;
   }
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycby7WPC-wzTndTft43sIZVz6Rup1hRAdQ5bH3cT9z9ZIdkfuWtz8EfhHf2Az5Pz1kroi/exec";  // ← DÁN URL WEB APP VÀO ĐÂY
+  const scriptURL = "https://script.google.com/macros/s/AKfycby7WPC-wzTndTft43sIZVz6Rup1hRAdQ5bH3cT9z9ZIdkfuWtz8EfhHf2Az5Pz1kroi/exec";
 
   const formData = new FormData();
   formData.append("fullname", fullname);
@@ -608,11 +888,10 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
 
   fetch(scriptURL, {
     method: 'POST',
-    body: formData,                // Dùng FormData → tự động gửi application/x-www-form-urlencoded
-    mode: 'no-cors'                // Quan trọng: tránh lỗi CORS
+    body: formData,
+    mode: 'no-cors'
   })
   .then(() => {
-    // Vì no-cors nên không đọc được response, nhưng thường thành công nếu deploy đúng
     document.getElementById("message").innerHTML = "Đăng ký thành công! Cảm ơn bạn đã tham gia.";
     document.getElementById("message").style.color = "green";
 
@@ -621,12 +900,11 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
     }, 1800);
   })
   .catch((error) => {
-    console.error('Error:', error);
-    document.getElementById("message").innerHTML = "Có lỗi xảy ra, vui lòng thử lại!";
+    console.error('Error!', error.message);
+    document.getElementById("message").innerHTML = "Đã có lỗi xảy ra. Vui lòng thử lại.";
     document.getElementById("message").style.color = "red";
   });
 });
 </script>
-
 </body>
 </html>
