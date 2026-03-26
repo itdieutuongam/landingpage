@@ -224,16 +224,17 @@
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    height: 200px;
-    display: flex;
-    align-items: stretch;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
   }
   .preview-content iframe {
+    position: absolute;
+    inset: 0;
     width: 100%;
-    height: 200px;
+    height: 100%;
     border: none;
     display: block;
-    flex-shrink: 0;
   }
   /* TikTok container chiều cao cố định */
   .tiktok-wrapper {
@@ -271,6 +272,7 @@
   @media (max-width: 900px) {
     .social-previews {
       grid-template-columns: 1fr;
+      max-width: 100%;
     }
     .social-links {
       gap: 30px;
