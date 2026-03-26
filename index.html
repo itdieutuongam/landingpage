@@ -83,61 +83,95 @@
   #message { text-align:center; margin-top:12px; font-weight:bold; }
 
   /* Header - ảnh full màn hình lớn */
+/* ==================== HEADER - TỐI ƯU TỶ LỆ 16:9 ==================== */
+header {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;           /* Giữ đúng tỷ lệ 16:9 */
+  min-height: 420px;              /* Chiều cao tối thiểu đẹp trên mobile */
+  max-height: 780px;              /* Giới hạn trên màn hình lớn */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 40px 20px;
+  box-sizing: border-box;
+}
+
+header .header-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;              /* Giữ tỷ lệ, full khung */
+  object-position: center 38%;    /* Điều chỉnh focus để giữ chữ và tượng đẹp hơn */
+  display: block;
+}
+
+/* Gradient overlay giữ màu đỏ đặc trưng */
+header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.20) 0%,
+    rgba(100, 10, 10, 0.48) 52%,
+    rgba(0, 0, 0, 0.78) 100%
+  );
+  z-index: 1;
+}
+
+header h1,
+header h2 {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  text-shadow: 0 4px 25px rgba(0,0,0,0.95), 
+               0 2px 10px rgba(0,0,0,0.9);
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+header h1 {
+  font-size: clamp(2.5rem, 7.2vw, 5.2rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  line-height: 1.08;
+  margin-bottom: 16px;
+  color: #ffffff;
+}
+
+header h2 {
+  font-size: clamp(1.15rem, 3.7vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.07em;
+  color: #ffffff;
+  opacity: 0.97;
+}
+
+/* Responsive mobile cho header */
+/* Responsive mobile cho header */
+@media (max-width: 768px) {
   header {
-    background-color: #1a0000;
-    color: white;
-    text-align: center;
-    position: relative;
-    width: 100%;
-    min-height: clamp(320px, 55vw, 600px);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    padding: 40px 20px;
+    aspect-ratio: 9 / 14;         /* Chuyển sang tỷ lệ dọc thân thiện với mobile */
+    min-height: 460px;
+    padding: 32px 16px;
   }
+  
   header .header-img {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    display: block;
+    object-position: center 32%;  /* Điều chỉnh nhẹ cho mobile */
   }
-  header::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.30) 0%,
-      rgba(120,5,5,0.50) 50%,
-      rgba(0,0,0,0.72) 100%
-    );
-    z-index: 1;
-  }
-  header h1,
-  header h2 {
-    position: relative;
-    z-index: 2;
-  }
+
   header h1 {
-    font-size: clamp(1.8rem, 5.5vw, 4rem);
-    font-weight: 900;
-    letter-spacing: 0.05em;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,1);
-    margin-bottom: 14px;
-    line-height: 1.2;
+    font-size: clamp(2.2rem, 8.5vw, 3.5rem);
   }
+  
   header h2 {
-    font-size: clamp(1rem, 3vw, 1.8rem) !important;
-    font-weight: 400;
-    letter-spacing: 0.10em;
-    text-shadow: 0 1px 10px rgba(0,0,0,0.8);
-    opacity: 0.96;
+    font-size: clamp(1.05rem, 4.8vw, 1.65rem);
   }
+}
 
   /* Festival Section */
   .festival-section {
@@ -204,8 +238,8 @@
 
   .social-previews {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
+    grid-template-columns: repeat(2, 0.5fr);
+    gap: 20px;
     align-items: start;
   }
   .preview-block {
@@ -438,10 +472,14 @@
   }
 
   .two-parts-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 40px;
-    margin: 40px 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      max-width: 1100px;           /* Giới hạn chiều rộng tối đa */
+      margin: 40px auto;           /* Căn giữa quan trọng nhất */
+      padding: 0 20px;
+      box-sizing: border-box;
+      width: 100%;
   }
   .event-info {
     background: #fffaf0;
@@ -467,15 +505,23 @@
     box-shadow: 0 4px 15px rgba(0,0,0,0.08);
   }
 
-  /* ── GALLERY 4 ảnh lớn ── */
-  .activities-gallery {
+.activities-gallery {
     width: 100%;
-  }
-  .activities-gallery .gallery-grid {
+    max-width: 860px;
+    margin: 0 auto;
+}
+
+.activities-gallery .gallery-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
-  }
+}
+
+@media (max-width: 600px) {
+    .activities-gallery .gallery-grid {
+        gap: 16px;
+    }
+}
   .gallery-item {
     position: relative;
     overflow: hidden;
@@ -634,12 +680,14 @@
     color: #ffecb3;
   }
 
-  /* ── Responsive ── */
-  @media (max-width: 900px) {
-    .two-parts-wrapper {
-      grid-template-columns: 1fr;
-      gap: 24px;
-    }
+    /* Responsive */
+    @media (max-width: 900px) {
+        .two-parts-wrapper {
+            grid-template-columns: 1fr;   /* Chuyển thành 1 cột trên mobile */
+            gap: 24px;
+            padding: 0 16px;
+            margin: 30px auto;
+        }
     .container {
       padding: 0 16px;
     }
@@ -667,28 +715,15 @@
     header h2 {
       font-size: clamp(0.95rem, 3.5vw, 1.4rem);
     }
-    /* Festival title */
-    .festival-title {
-      font-size: clamp(1.3rem, 5vw, 2rem);
-    }
-    .festival-title .highlight {
-      font-size: clamp(0.9rem, 3vw, 1.2rem);
-    }
+
   }
 
   @media (max-width: 600px) {
-    .preview-grid {
-      grid-template-columns: 1fr;
-    }
-    section {
-      padding: 36px 0;
-    }
-    .info-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-    .event-info p {
-      font-size: 0.95rem;
-    }
+      .two-parts-wrapper {
+          gap: 20px;
+          padding: 0 12px;
+          margin: 25px auto;
+      }
   }
 
   /* Footer */
@@ -807,37 +842,14 @@
   <section>
     <h2 class="section-title">Lễ hội Quán Thế Âm – Ngũ Hành Sơn 2026</small></h2>
 
-    <div class="two-parts-wrapper">
-
-      <div class="event-info">
-        <p>
-          Lễ hội Quán Thế Âm là sự kiện văn hóa tâm linh đặc sắc, nơi hội tụ các nghi lễ Phật giáo trang nghiêm cùng những giá trị văn hóa truyền thống, 
-          hướng con người đến lòng từ bi, thiện lành và sự an lạc.
-          Hòa chung không khí linh thiêng của Lễ hội, Diệu Tướng Am hữu duyên hiện diện, mang đến một không gian Văn hóa – Nghệ thuật – 
-          Tâm linh được kiến tạo chuẩn mực và trang nghiêm. Diệu Tướng Am trân trọng gửi trao 3000 phần quà kết duyên như một lời tri ân, 
-          đồng hành cùng Quý vị trên hành trình nuôi dưỡng sự an lạc trong đời sống.
-        </p>
-
-        <div class="info-grid">
-          <div class="info-item">
-            <h3 style="color:#c62828">Địa điểm</h3>
-            <p>Chùa Quán Thế Âm, Ngũ Hành Sơn,<br> TP. Đà Nẵng</p>
-          </div>
-          <div class="info-item">
-            <h3 style="color:#c62828">Thời gian</h3>
-            <p>Ngày 04.04.2026 - 07.04.02026<br>(Nhằm ngày 17.02 <br>Âm lịch - 20.02 Âm lịch)</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="activities-gallery">
+    <div class="activities-gallery">
         <div class="gallery-grid">
           <div class="gallery-item">
             <div class="img-wrap">
               <img src="image/1.jpg" alt="TRẢI NGHIỆM NẶN TÒ HE" loading="lazy">
             </div>
             <div class="caption">
-              <h3>TRẢI NGHIỆM VĂN HÓA ĐẶC SẮC</h3>
+              <h3>TRIỂN LÃM KHÔNG GIAN <br> VĂN HÓA NGHỆ THUẬT - TÂM LINH</h3>
             </div>
           </div>
 
@@ -846,7 +858,8 @@
               <img src="image/2.jpg" alt="XẾP LÁ DỪA NGHỆ THUẬT" loading="lazy">
             </div>
             <div class="caption">
-              <h3>VIẾT NGUYỆN ƯỚC DƯỚI BÒNG QUAN ÂM</h3>
+              <h3>GỬI ƯỚC NGUYỆN DƯỚI BÓNG QUÁN ÂM <br>
+              LAN TOẢ NGUYỆN LÀNH,<br> CẦU CHÚNG SINH AN LẠC</h3>
             </div>
           </div>
 
@@ -855,8 +868,8 @@
               <img src="image/3.jpg" alt="BIỂU DIỄN LÂN SƯ RỒNG NGHỆ THUẬT" loading="lazy">
             </div>
             <div class="caption">
-              <h3>TRIỂN LÃM KHÔNG GIAN VĂN HÓA <br>NGHỆ THUẬT - TÂM LINH</h3>
-              <p>Rộn ràng trống hội gọi xuân về, cùng các tiết mục biểu diễn hấp dẫn: TỨ QUÝ HƯNG LONG, MAI HOA THUNG, LÂN CHẦU PHẬT,...</p>
+              <h3>QUÀ TẶNG LINH PHÙ PHẬT THÍCH CA <br> MÂU NI 
+                    THÂN TÂM AN LẠC</h3>
             </div>
           </div>
 
@@ -865,27 +878,93 @@
               <img src="image/4.jpg" alt="NGHỆ THUẬT THƯ PHÁP VIỆT" loading="lazy">
             </div>
             <div class="caption">
-              <h3>NGHỆ THUẬT THƯ PHÁP VIỆT</h3>
-              <p>Xin chữ đầu năm trên quạt An Phong - Tứ Quý - Như Ý. Nguyện mang theo hơi thở từ bi và trí tuệ, thổi vào đời những nhịp an vui</p>
+              <h3>QUÀ TẶNG CHÚ ĐẠI BI<br>
+              TÂM MINH CÁT TƯỜNG </h3>
             </div>
           </div>
         </div>
       </div>
-
-    </div>
   </section>
 
 </div>
 
 <!-- PHẦN LỄ HỘI TẾT - LAYOUT ĐỎ -->
 <section class="festival-section"><h2 class="festival-title">
-      <span class="highlight">Những hoạt động không thể bỏ lỡ</span>
-      <span class="main-title">LỄ HỘI TẾT DIỆU TƯỚNG AM</span>
     </h2>
 
-    <div class="social-section">
+    <div class="events-grid">
 
-      <!-- Previews hiển thị trực tiếp luôn -->
+      <!-- CARD TOP -->
+
+
+      <!-- CARD 2 -->
+      <div class="event-card">
+        <div class="card-header">
+          <div class="calendar-icon">📅</div>
+          <h3>NGÀY 04/04  (17/02 ÂM LỊCH) – KHAI HỘI </h3>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>07:00 – Lễ khai kinh, Thượng phan – Thượng kỳ – Thượng phướn</li>
+            <li>08:00 – Khai hội (Lân Sư Rồng và các hoạt động văn hóa, thể thao dân gian) </li>
+            <li>17:30 – Khai mạc Lễ hội </li>
+            <li>20:00 – Hoa đăng Thiền hành </li>
+          </ul>
+          <div class="time">07:00 – 20:00</div>
+        </div>
+      </div>
+
+            <!-- CARD 2 -->
+      <div class="event-card">
+        <div class="card-header">
+          <div class="calendar-icon">📅</div>
+          <h3>NGÀY 05/04 (18/02 ÂM LỊCH) <br> – PHÁP HỘI & KẾT NỐI</h3>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>14:00 – Pháp đàn Đại bi – Thuyết pháp</li>
+            <li>18:30 – Thuyết giảng chủ đề Lễ hội</li>
+            <li>19:00 – Lễ Quán đảnh Quán Âm</li>
+            <li>20:30 – Hoa đăng – Lửa trại</li>
+          </ul>
+          <div class="time">14:00 – 20:30</div>
+        </div>
+      </div> 
+
+       <!-- CARD 2 -->
+      <div class="event-card">
+        <div class="card-header">
+          <div class="calendar-icon">📅</div>
+          <h3>NGÀY 06/04 (19/02 ÂM LỊCH) <br> – CHÍNH LỄ</h3>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>07:00 – Lễ vía Đức Bồ Tát Quán Thế Âm</li>
+            <li>09:00 – Lễ Quán đảnh Quán Âm</li>
+            <li>09:30 – Hội đua thuyền truyền thống</li>
+            <li>14:00 – Pháp đàn đại bi, thiền tọa, thuyết pháp</li>
+            <li>20:00 – Hoa đăng Thiền hành</li>
+          </ul>
+          <div class="time">07:00 – 20:00</div>
+        </div>
+      </div> 
+
+                        <!-- CARD 2 -->
+      <div class="event-card">
+        <div class="card-header">
+          <div class="calendar-icon">📅</div>
+          <h3>NGÀY 07/04 – KHÉP LẠI (LAN TỎA)</h3>
+        </div>
+        <div class="card-content">
+          <ul>
+            <li>07:00 – Chương trình đi bộ vì hòa bình năm 2026</li>
+            <li>09:30 – Hội đua thuyền truyền thống</li>
+          </ul>
+          <div class="time">07:00 – 09:30</div>
+        </div>
+      </div>
+
+    </div>
       <div class="social-previews">
         <!-- Facebook Preview -->
         <div class="preview-block" id="fb-preview">
@@ -911,48 +990,14 @@
           <h3 class="preview-title">Video mới nhất từ YouTube</h3>
           <div class="preview-content">
             <!-- Embed video đại diện hoặc mới nhất (thay v= bằng ID video thực tế từ kênh) -->
-            <iframe src="https://www.youtube.com/embed/vUrLdPGsF5U?rel=0" title="Diệu Tướng Am Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe width="1349" height="759" src="https://www.youtube.com/embed/HiDiPFnD4EY" title="KHÔNG GIAN VĂN HÓA NGHỆ THUẬT TÂM LINH - DIỆU TƯỚNG AM BÀ TRIỆU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
           </div>
           <a href="http://www.youtube.com/@dieutuongamnghethuatphatgiao?sub_confirmation=1" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
         </div>
 
         <!-- TikTok Preview -->
-        <div class="preview-block" id="tt-preview">
-          <h3 class="preview-title">Video ngắn từ TikTok</h3>
-          <div class="preview-content">
-            <div class="tiktok-wrapper">
-              <!-- Embed video TikTok mới (thay video-id và cite bằng video thực tế) -->
-              <blockquote class="tiktok-embed" cite="https://www.tiktok.com/@dieu_tuong_am/video/7495389202897538311" data-video-id="7495389202897538311" style="max-width: 100%; width:100%;">
-                <section> <a target="_blank" title="@dieu_tuong_am" href="https://www.tiktok.com/@dieu_tuong_am">@dieu_tuong_am</a> </section>
-              </blockquote>
-              <script async src="https://www.tiktok.com/embed.js"></script>
-            </div>
-          </div>
-          <a href="https://www.tiktok.com/@dieu_tuong_am" target="_blank" class="more-link">Xem thêm trên TikTok →</a>
-        </div>
       </div>
-    </div>
-    <div class="events-grid">
-
-      <!-- CARD TOP -->
-
-
-      <!-- CARD 2 -->
-      <div class="event-card">
-        <div class="card-header">
-          <div class="calendar-icon">📅</div>
-          <h3>Chuỗi trải nghiệm</h3>
-        </div>
-        <div class="card-content">
-          <ul>
-            <li>Tham quan showroom</li>
-            <li>Check-in không gian Tết</li>
-            <li>Hái lộc may mắn</li>
-          </ul>
-          <div class="time">08:30 – 20:00</div>
-        </div>
-      </div>
-
     </div>
 
   </div>
@@ -963,7 +1008,7 @@
 
     <div style="display: flex; flex-direction: column; align-items: flex-start; margin-bottom: 20px;">
       <h2 class="footer-title" style="margin: 0; line-height: 1;">DIỆU TƯỚNG AM</h2>
-      <p class="footer-subtitle" style="margin-top: 10px; line-height: 1; font-size: 1.1rem;">Không gian Văn hóa Nghệ thuật Phật Giáo</p>
+      <p class="footer-subtitle" style="margin-top: 10px; line-height: 1; font-size: 1.1rem;">Không gian Văn hóa Nghệ thuật Tâm linh</p>
     </div>
 
     <div class="footer-line"></div>
@@ -990,7 +1035,7 @@
     </div>
 
     <p class="footer-copy">
-      Copyright ©2025 DIEUTUONGAM. All Rights Reserved
+      Copyright ©2026 DIEUTUONGAM. All Rights Reserved
     </p>
 
   </div>
