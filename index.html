@@ -804,6 +804,37 @@
 
 <div class="container">
 
+  <!-- Social Previews: YouTube & Facebook -->
+  <div class="social-previews" style="margin: 40px auto 0; background: #a41010; padding: 40px 20px; border-radius: 16px;">
+    <!-- Facebook Preview -->
+    <div class="preview-block" id="fb-preview">
+      <h3 class="preview-title">Khoảnh khắc mới nhất từ Facebook</h3>
+      <div class="preview-content">
+        <iframe 
+          src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdieutuongam.nghethuatphatgiao%2Fvideos%2F1196280665501159%2F&width=500&show_text=false&height=280&t=0" 
+          width="500" 
+          height="280" 
+          style="border:none;overflow:hidden" 
+          scrolling="no" 
+          frameborder="0" 
+          allowfullscreen="true" 
+          allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
+        </iframe>
+      </div>
+      <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank" class="more-link">Xem thêm trên Facebook →</a>
+    </div>
+
+    <!-- YouTube Preview -->
+    <div class="preview-block" id="yt-preview">
+      <h3 class="preview-title">Video mới nhất từ YouTube</h3>
+      <div class="preview-content">
+        <iframe width="1349" height="759" src="https://www.youtube.com/embed/HiDiPFnD4EY" title="KHÔNG GIAN VĂN HÓA NGHỆ THUẬT TÂM LINH - DIỆU TƯỚNG AM BÀ TRIỆU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+      <a href="http://www.youtube.com/@dieutuongamnghethuatphatgiao?sub_confirmation=1" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
+    </div>
+  </div>
+
   <section>
     <h2 class="section-title">Lễ hội Quán Thế Âm <br> Ngũ Hành Sơn 2026</small></h2>
 
@@ -945,42 +976,8 @@
 
 
     </div>
-      <div class="social-previews">
-        <!-- Facebook Preview -->
-        <div class="preview-block" id="fb-preview">
-          <h3 class="preview-title">Khoảnh khắc mới nhất từ Facebook</h3>
-          <div class="preview-content">
-            <!-- Embed post mới nhất hoặc đại diện (thay href nếu có post mới) -->
-          <iframe 
-            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Fdieutuongam.nghethuatphatgiao%2Fvideos%2F1196280665501159%2F&width=500&show_text=false&height=280&t=0" 
-            width="500" 
-            height="280" 
-            style="border:none;overflow:hidden" 
-            scrolling="no" 
-            frameborder="0" 
-            allowfullscreen="true" 
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share">
-          </iframe>
-          </div>
-          <a href="https://www.facebook.com/dieutuongam.nghethuatphatgiao" target="_blank" class="more-link">Xem thêm trên Facebook →</a>
-        </div>
-
-        <!-- YouTube Preview -->
-        <div class="preview-block" id="yt-preview">
-          <h3 class="preview-title">Video mới nhất từ YouTube</h3>
-          <div class="preview-content">
-            <!-- Embed video đại diện hoặc mới nhất (thay v= bằng ID video thực tế từ kênh) -->
-            <iframe width="1349" height="759" src="https://www.youtube.com/embed/HiDiPFnD4EY" title="KHÔNG GIAN VĂN HÓA NGHỆ THUẬT TÂM LINH - DIỆU TƯỚNG AM BÀ TRIỆU" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-          </div>
-          <a href="http://www.youtube.com/@dieutuongamnghethuatphatgiao?sub_confirmation=1" target="_blank" class="more-link">Khám phá kênh YouTube →</a>
-        </div>
-
-        <!-- TikTok Preview -->
-      </div>
     </div>
 
-  </div>
 </section>
 
 <footer>
@@ -1064,7 +1061,7 @@ document.getElementById("regForm").addEventListener("submit", function(e) {
   btn.disabled    = true;
   btn.textContent = "Đang gửi...";
 
-  const scriptURL = "https://script.google.com/macros/s/AKfycby7WPC-wzTndTft43sIZVz6Rup1hRAdQ5bH3cT9z9ZIdkfuWtz8EfhHf2Az5Pz1kroi/exec";
+  const scriptURL = "https://script.google.com/macros/s/AKfycbz1GjmHj3k0Ko39oruDdKyBFc0IRp2MdWyRjV2Qax_F0A09ZaKk22IK-azmb4RCz7-f/exec";
 
   const formData = new FormData();
   formData.append("fullname", fullname);
